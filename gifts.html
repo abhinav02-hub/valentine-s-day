@@ -74,31 +74,53 @@
       border-top: 1px dashed #ddd;
       padding-top: 15px;
     }
+    .gift-top-img {
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+.bottom-gif {
+  position: fixed;
+  bottom: 10px;
+  width: 70px;
+  opacity: 0.85;
+}
+
+.bottom-left {
+  left: 10px;
+}
+
+.bottom-right {
+  right: 10px;
+}
+
   </style>
 </head>
 
 <body>
 
   <div class="container">
+    <img src="gift.jpg" class="gift-top-img" alt="gift">
     <h1>I got something for you 💝</h1>
     <div class="sub">Choose one… or maybe all 😌</div>
 
     <div class="gifts">
-      <div class="gift" onclick="goLetter()">
-        <div class="emoji">💌</div>
-        <p>A Letter From My Heart</p>
-      </div>
+  <div class="gift" onclick="goLetter()">
+    <div class="emoji">🎁</div>
+    <p>Gift One</p>
+  </div>
 
-      <div class="gift" onclick="goVideo1()">
-        <div class="emoji">🎥</div>
-        <p>A Little Memory</p>
-      </div>
+  <div class="gift" onclick="goVideo1()">
+    <div class="emoji">🎁</div>
+    <p>Gift Two</p>
+  </div>
 
-      <div class="gift" onclick="goVideo2()">
-        <div class="emoji">🎞️</div>
-        <p>One More Surprise</p>
-      </div>
-    </div>
+  <div class="gift" onclick="goVideo2()">
+    <div class="emoji">🎁</div>
+    <p>Gift Three</p>
+  </div>
+</div>
+
 
     <div class="music-box">
       🎵 Music Component (Gifts Page)
@@ -118,6 +140,8 @@
       window.location.href = "video2.html";
     }
   </script>
+<img src="extra.gif" class="bottom-gif bottom-left" alt="gif">
+<img src="extra1.gif" class="bottom-gif bottom-right" alt="gif">
 
 </body>
 </html>
