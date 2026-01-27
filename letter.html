@@ -67,6 +67,38 @@
       border-top: 1px dashed #ddd;
       padding-top: 15px;
     }
+    .corner-gifs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.corner {
+  width: 50px;
+  opacity: 0.85;
+}
+
+.corner.left {
+  align-self: flex-start;
+}
+
+.corner.right {
+  align-self: flex-start;
+}
+.below-letter-gif {
+  width: 80px;
+  display: block;
+  margin: 40px auto 20px;
+  opacity: 0.9;
+}
+.final-gif {
+  width: 60px;
+  display: block;
+  margin: 20px auto;
+  opacity: 0.85;
+}
+
+
   </style>
 </head>
 
@@ -74,6 +106,11 @@
 
   <div class="letter">
     <h1>My Love 💗</h1>
+    <div class="corner-gifs">
+  <img src="gif1.gif" class="corner left">
+  <img src="gif2.gif" class="corner right">
+</div>
+
 
     <div class="content">
       <!-- WRITE YOUR LETTER HERE -->
@@ -92,8 +129,10 @@
       — Yours
     </div>
 
+    <img src="gif3.gif" class="below-letter-gif">
     <a href="gifts.html" class="back-btn">← Back to Gifts</a>
 
+    <img src="gif4.gif" class="final-gif">
     <div class="music-box">
       🎵 Music Component (Letter Page)
     </div>
