@@ -121,6 +121,10 @@
       color: #333;
       position: relative;
     }
+    .buttons {
+  transition: opacity 0.5s ease;
+}
+
 
     .tease {
       margin-top: 15px;
@@ -248,20 +252,27 @@
   const card = document.querySelector(".card");
   const title = card.querySelector("h1");
   const gif = document.getElementById("mainGif");
+  const buttons = document.querySelector(".buttons");
 
-  // Update text
+  // Change text
   title.innerText = "Yayyy 💕 preparing your surprises…";
+
+  // Hide buttons smoothly
+  buttons.style.opacity = "0";
+  setTimeout(() => {
+    buttons.style.display = "none";
+  }, 500);
 
   // Fade out current GIF
   gif.style.opacity = "0";
 
-  // After fade, swap GIF & fade in
+  // Swap GIF smoothly
   setTimeout(() => {
     gif.src = "transition.gif";
     gif.style.opacity = "1";
   }, 500);
 
-  // Heart burst
+  // Heart burst effect
   for (let i = 0; i < 12; i++) {
     const heart = document.createElement("div");
     heart.className = "heart-burst";
@@ -270,20 +281,20 @@
     heart.style.setProperty("--x", `${Math.random() * 120 - 60}px`);
     heart.style.setProperty("--y", `${Math.random() * 120 - 60}px`);
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 1000);
   }
 
   // Card transition
-  card.style.transition = "all 6s ease";
+  card.style.transition = "all 8.9s ease";
   card.style.transform = "scale(0.9)";
   card.style.opacity = "0";
 
   // Redirect
   setTimeout(() => {
     window.location.href = "gifts.html";
-  }, 5000);
+  },6200);
 }
+
 
 
   </script>
