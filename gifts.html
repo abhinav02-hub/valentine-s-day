@@ -2,63 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Valentine Gifts 💝</title>
+  <title>For You 💝</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Playfair Display', serif;
-    }
-
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, #ffe4f0, #ffffff);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: 'Playfair Display', serif;
+      padding: 30px;
     }
 
     .container {
       text-align: center;
-      padding: 40px;
+      max-width: 900px;
+      width: 100%;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
       color: #ff4d88;
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      color: #666;
       margin-bottom: 40px;
-      font-size: 2.3rem;
+      font-size: 1rem;
     }
 
     .gifts {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 30px;
-      max-width: 800px;
-      margin: auto;
     }
 
     .gift {
       background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      padding: 35px 25px;
+      border-radius: 22px;
+      box-shadow: 0 18px 35px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: 0.4s;
+      transition: all 0.4s ease;
     }
 
     .gift:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 25px 40px rgba(255,77,136,0.3);
+      transform: translateY(-12px) scale(1.04);
+      box-shadow: 0 28px 50px rgba(255,77,136,0.3);
     }
 
     .emoji {
-      font-size: 3rem;
+      font-size: 3.2rem;
       margin-bottom: 15px;
     }
 
@@ -80,20 +80,21 @@
 <body>
 
   <div class="container">
-    <h1>Choose your Valentine surprise 💝</h1>
+    <h1>I got something for you 💝</h1>
+    <div class="sub">Choose one… or maybe all 😌</div>
 
     <div class="gifts">
-      <div class="gift" onclick="openLetter()">
+      <div class="gift" onclick="goLetter()">
         <div class="emoji">💌</div>
-        <p>Open the Love Letter</p>
+        <p>A Letter From My Heart</p>
       </div>
 
-      <div class="gift" onclick="openVideo1()">
+      <div class="gift" onclick="goVideo1()">
         <div class="emoji">🎥</div>
-        <p>Watch Our Memory</p>
+        <p>A Little Memory</p>
       </div>
 
-      <div class="gift" onclick="openVideo2()">
+      <div class="gift" onclick="goVideo2()">
         <div class="emoji">🎞️</div>
         <p>One More Surprise</p>
       </div>
@@ -105,16 +106,16 @@
   </div>
 
   <script>
-    function openLetter() {
+    function goLetter() {
       window.location.href = "letter.html";
     }
 
-    function openVideo1() {
-      alert("Video 1 coming soon 💕");
+    function goVideo1() {
+      window.location.href = "video1.html";
     }
 
-    function openVideo2() {
-      alert("Video 2 coming soon 💖");
+    function goVideo2() {
+      window.location.href = "video2.html";
     }
   </script>
 
