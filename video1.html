@@ -169,6 +169,24 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+/* Close (shrink-back) animation */
+.video-wrapper.closing {
+  animation: shrinkVideo 0.6s ease forwards;
+}
+
+@keyframes shrinkVideo {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
 
     
   </style>
@@ -230,22 +248,28 @@ function playVideo() {
 }
 
  function closeVideo(event) {
-  event.stopPropagation(); // 🔥 THIS is the key
+  event.stopPropagation();
 
   const box = document.getElementById("videoBox");
   const video = document.getElementById("video");
   const dim = document.getElementById("dim");
 
+  // Pause video
   video.pause();
   video.currentTime = 0;
 
-  box.classList.remove("playing", "expanded", "locked");
+  // Start shrink animation
+  box.classList.add("closing");
   dim.classList.remove("visible");
 
-  video.removeAttribute("controls");
-
-  videoStarted = false;
+  // After animation ends, fully reset
+  setTimeout(() => {
+    box.classList.remove("playing", "expanded", "locked", "closing");
+    video.removeAttribute("controls");
+    videoStarted = false;
+  }, 600); // must match animation duration
 }
+
 
 
     function goBack() {
