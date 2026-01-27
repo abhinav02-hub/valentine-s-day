@@ -164,6 +164,11 @@
 .video-wrapper.locked .play-btn {
   pointer-events: none;
 }
+.play-btn,
+.close-btn {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
     
   </style>
@@ -175,12 +180,12 @@
   <div class="video-page">
     <h1>For You 💗</h1>
 
-    <div class="video-wrapper" id="videoBox" onclick="playVideo()">
+    <div class="video-wrapper" id="videoBox">
       <!-- Thumbnail -->
       <img src="thumb1.jpg" class="video-thumb" alt="video thumbnail">
 
       <!-- Play button -->
-      <div class="play-btn">▶</div>
+     <div class="play-btn" onclick="playVideo()">▶</div>
       <div class="close-btn" onclick="closeVideo(event)">✕</div>
 
 
