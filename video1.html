@@ -46,6 +46,24 @@
       max-width: 92vw;
       box-shadow: 0 30px 60px rgba(0,0,0,0.25);
     }
+    .video-wrapper.expanded {
+  animation: expandVideo 0.8s ease forwards;
+}
+
+@keyframes expandVideo {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.7;
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
     .video-thumb {
       width: 100%;
@@ -102,12 +120,31 @@
       font-size: 0.95rem;
     }
 
+    .bg-dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.bg-dim.visible {
+  opacity: 1;
+}
+
+
     
   </style>
 </head>
 
 <body>
 
+  <div id="dim" class="bg-dim"></div>
   <div class="video-page">
     <h1>For You 💗</h1>
 
@@ -132,17 +169,24 @@
 
   <script>
     function playVideo() {
-      const box = document.getElementById("videoBox");
-      const video = document.getElementById("video");
+  const box = document.getElementById("videoBox");
+  const video = document.getElementById("video");
+  const dim = document.getElementById("dim");
 
-      if (box.classList.contains("playing")) return;
+  if (box.classList.contains("playing")) return;
 
-      box.classList.add("playing");
-      box.classList.add("expanded");
+  // Trigger fade + expand
+  dim.classList.add("visible");
+  box.classList.add("expanded");
 
-      video.play();
-      video.setAttribute("controls", "controls");
-    }
+  // After slight delay, start video reveal
+  setTimeout(() => {
+    box.classList.add("playing");
+    video.play();
+    video.setAttribute("controls", "controls");
+  }, 300);
+}
+
     function goBack() {
   const video = document.getElementById("video");
 
