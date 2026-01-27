@@ -94,6 +94,25 @@
   right: 10px;
 }
 
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.gift.opening {
+  animation: shake 0.4s ease;
+  transform: scale(1.08);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+
   </style>
 </head>
 
@@ -105,17 +124,17 @@
     <div class="sub">Choose one… or maybe all 😌</div>
 
     <div class="gifts">
-  <div class="gift" onclick="goLetter()">
+  <div class="gift" onclick="openGift(this, 'letter.html')">
     <div class="emoji">🎁</div>
     <p>Gift One</p>
   </div>
 
-  <div class="gift" onclick="goVideo1()">
+  <div class="gift" onclick="openGift(this, 'video1.html')">
     <div class="emoji">🎁</div>
     <p>Gift Two</p>
   </div>
 
-  <div class="gift" onclick="goVideo2()">
+  <div class="gift" onclick="openGift(this, 'video2.html')">
     <div class="emoji">🎁</div>
     <p>Gift Three</p>
   </div>
@@ -128,18 +147,23 @@
   </div>
 
   <script>
-    function goLetter() {
-      window.location.href = "letter.html";
-    }
+  function openGift(element, targetPage) {
+    // stop double clicks
+    if (element.classList.contains("opening")) return;
 
-    function goVideo1() {
-      window.location.href = "video1.html";
-    }
+    // add animation to the clicked gift
+    element.classList.add("opening");
 
-    function goVideo2() {
-      window.location.href = "video2.html";
-    }
-  </script>
+    // fade whole page
+    document.body.classList.add("fade-out");
+
+    // go to next page after animation
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 800);
+  }
+</script>
+
 <img src="extra.gif" class="bottom-gif bottom-left" alt="gif">
 <img src="extra1.gif" class="bottom-gif bottom-right" alt="gif">
 
