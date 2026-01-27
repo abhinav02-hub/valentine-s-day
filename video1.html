@@ -140,6 +140,27 @@
 .video-wrapper.locked {
   pointer-events: none;
 }
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.video-wrapper.playing .close-btn {
+  display: flex;
+}
 
 
     
@@ -158,6 +179,8 @@
 
       <!-- Play button -->
       <div class="play-btn">▶</div>
+      <div class="close-btn" onclick="closeVideo()">✕</div>
+
 
       <!-- Actual video -->
       <video id="video">
@@ -197,6 +220,29 @@ function playVideo() {
     video.setAttribute("controls", "controls");
   }, 300);
 }
+
+  function closeVideo() {
+  const box = document.getElementById("videoBox");
+  const video = document.getElementById("video");
+  const dim = document.getElementById("dim");
+
+  // Pause and reset video
+  video.pause();
+  video.currentTime = 0;
+
+  // Remove states
+  box.classList.remove("playing");
+  box.classList.remove("expanded");
+  box.classList.remove("locked");
+  dim.classList.remove("visible");
+
+  // Reset controls
+  video.removeAttribute("controls");
+
+  // Allow play again
+  videoStarted = false;
+}
+
 
     function goBack() {
   const video = document.getElementById("video");
