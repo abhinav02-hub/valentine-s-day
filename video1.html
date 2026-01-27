@@ -136,6 +136,10 @@
 .bg-dim.visible {
   opacity: 1;
 }
+    
+.video-wrapper.locked {
+  pointer-events: none;
+}
 
 
     
@@ -168,18 +172,25 @@
   </div>
 
   <script>
-    function playVideo() {
+   let videoStarted = false;
+
+function playVideo() {
+  if (videoStarted) return; // hard lock
+
+  videoStarted = true;
+
   const box = document.getElementById("videoBox");
   const video = document.getElementById("video");
   const dim = document.getElementById("dim");
 
-  if (box.classList.contains("playing")) return;
+  // Lock interactions
+  box.classList.add("locked");
 
-  // Trigger fade + expand
+  // Trigger visuals
   dim.classList.add("visible");
   box.classList.add("expanded");
 
-  // After slight delay, start video reveal
+  // Delay video start for smoothness
   setTimeout(() => {
     box.classList.add("playing");
     video.play();
@@ -190,13 +201,16 @@
     function goBack() {
   const video = document.getElementById("video");
 
-  if (!video.paused) {
+  if (video) {
     video.pause();
-    video.currentTime = 0; // reset (optional but clean)
+    video.currentTime = 0;
   }
+
+  videoStarted = false; // reset lock
 
   window.location.href = "gifts.html";
 }
+
 
   </script>
 
