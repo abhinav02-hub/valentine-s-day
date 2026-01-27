@@ -97,6 +97,35 @@
   margin: 20px auto;
   opacity: 0.85;
 }
+.animate-text span {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: revealLine 0.8s ease forwards;
+}
+
+@keyframes revealLine {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.corner,
+.below-letter-gif,
+.final-gif {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
 
 
   </style>
@@ -112,7 +141,8 @@
 </div>
 
 
-    <div class="content">
+    <div class="content animate-text">
+
       <!-- WRITE YOUR LETTER HERE -->
       Dear love,<br><br>
 
@@ -137,6 +167,26 @@
       🎵 Music Component (Letter Page)
     </div>
   </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const content = document.querySelector(".animate-text");
+    if (!content) return;
+
+    // Split text by line breaks
+    const lines = content.innerHTML
+      .split("<br><br>")
+      .map(line => `<span>${line}</span>`);
+
+    content.innerHTML = lines.join("");
+
+    const spans = content.querySelectorAll("span");
+    spans.forEach((span, index) => {
+      span.style.animationDelay = `${index * 0.6}s`;
+    });
+  });
+</script>
+
 
 </body>
 </html>
