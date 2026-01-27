@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="transition.gif">
+  
   <meta charset="UTF-8">
   <title>Will You Be My Valentine? 💗</title>
 
@@ -138,7 +140,46 @@
     .main-gif {
   width: 120px;
   margin-bottom: 20px;
+  transition: opacity 0.5s ease;
 }
+    
+.heart-burst {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff4d88;
+  transform: rotate(45deg);
+  animation: burst 1s ease forwards;
+  opacity: 0.8;
+}
+
+.heart-burst::before,
+.heart-burst::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #ff4d88;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart-burst::before {
+  top: -5px;
+  left: 0;
+}
+
+.heart-burst::after {
+  left: -5px;
+  top: 0;
+}
+
+@keyframes burst {
+  to {
+    transform: translate(var(--x), var(--y)) rotate(45deg);
+    opacity: 0;
+  }
+}
+
 
   </style>
 </head>
@@ -208,18 +249,37 @@
   const title = card.querySelector("h1");
   const gif = document.getElementById("mainGif");
 
-  // Change text
+  // Update text
   title.innerText = "Yayyy 💕 preparing your surprises…";
 
-  // Change GIF
-  gif.src = "transition.gif";
+  // Fade out current GIF
+  gif.style.opacity = "0";
 
-  // Smooth transition
-  card.style.transition = "all 5.8s ease";
+  // After fade, swap GIF & fade in
+  setTimeout(() => {
+    gif.src = "transition.gif";
+    gif.style.opacity = "1";
+  }, 500);
+
+  // Heart burst
+  for (let i = 0; i < 12; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart-burst";
+    heart.style.left = "50%";
+    heart.style.top = "45%";
+    heart.style.setProperty("--x", `${Math.random() * 120 - 60}px`);
+    heart.style.setProperty("--y", `${Math.random() * 120 - 60}px`);
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  // Card transition
+  card.style.transition = "all 1.4s ease";
   card.style.transform = "scale(0.9)";
   card.style.opacity = "0";
 
-  // Redirect after animation
+  // Redirect
   setTimeout(() => {
     window.location.href = "gifts.html";
   }, 2200);
