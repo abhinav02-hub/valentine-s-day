@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? 💗</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 8s infinite ease-in;
+      opacity: 0.6;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -10%;
+        transform: translateX(0) rotate(45deg);
+      }
+      100% {
+        bottom: 110%;
+        transform: translateX(-50px) rotate(45deg);
+      }
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+      z-index: 10;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d88;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #f1f1f1;
+      color: #333;
+      position: relative;
+    }
+
+    .tease {
+      margin-top: 15px;
+      color: #ff4d88;
+      font-size: 0.95rem;
+      min-height: 20px;
+    }
+
+    /* Music placeholder */
+    .music-box {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #aaa;
+      border-top: 1px dashed #ddd;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Main Card -->
+  <div class="card">
+    <h1>Will you be my Valentine? 💗</h1>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="goYes()">Yes 💖</button>
+      <button id="noBtn" onmouseover="moveNo()">No 🙄</button>
+    </div>
+
+    <div class="tease" id="teaseText"></div>
+
+    <!-- Music placeholder -->
+    <div class="music-box">
+      🎵 Music Component (Main Page) – add audio later
+    </div>
+  </div>
+
+  <script>
+    const teaseTexts = [
+      "Heyyy 😒 that’s not fair",
+      "Nice try, click YES 💗",
+      "You’re breaking my heart 💔",
+      "Nope, not allowed 😏"
+    ];
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      const tease = document.getElementById("teaseText");
+
+      btn.style.position = "absolute";
+      btn.style.left = Math.random() * 70 + "%";
+      btn.style.top = Math.random() * 70 + "%";
+
+      tease.innerText = teaseTexts[Math.floor(Math.random() * teaseTexts.length)];
+    }
+
+    function goYes() {
+      alert("YAYYY 💕 (Next page coming soon)");
+      // later: window.location.href = "gifts.html";
+    }
+  </script>
+
+</body>
+</html>
