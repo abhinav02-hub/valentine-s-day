@@ -160,7 +160,7 @@
   <!-- Main Card -->
   <div class="card">
     <div class="card">
-  <img src="main.gif" class="main-gif" alt="cute gif">
+  <img src="main.gif" id="mainGif" class="main-gif" alt="cute gif">
   <h1>Will you be my Valentine? 💗</h1>
 
 
@@ -206,17 +206,25 @@
    function goYes() {
   const card = document.querySelector(".card");
   const title = card.querySelector("h1");
+  const gif = document.getElementById("mainGif");
 
+  // Change text
   title.innerText = "Yayyy 💕 preparing your surprises…";
 
-  card.style.transition = "all 2.8s ease";
+  // Change GIF
+  gif.src = "transition.gif";
+
+  // Smooth transition
+  card.style.transition = "all 3.8s ease";
   card.style.transform = "scale(0.9)";
   card.style.opacity = "0";
 
+  // Redirect after animation
   setTimeout(() => {
     window.location.href = "gifts.html";
-  }, 2300);
-}xxxxxx
+  }, 2200);
+}
+
 
   </script>
 
