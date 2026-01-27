@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Little Surprise 🎥</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe4f0, #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      padding: 20px;
+    }
+
+    .video-page {
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d88;
+      margin-bottom: 25px;
+    }
+
+    /* Video card */
+    .video-wrapper {
+      position: relative;
+      max-width: 320px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.8s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      background: white;
+    }
+
+    .video-wrapper.expanded {
+      max-width: 92vw;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+    }
+
+    .video-thumb {
+      width: 100%;
+      display: block;
+    }
+
+    /* Play button */
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: #ff4d88;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    video {
+      width: 100%;
+      display: none;
+      border-radius: 20px;
+      background: black;
+    }
+
+    .video-wrapper.playing video {
+      display: block;
+    }
+
+    .video-wrapper.playing .video-thumb,
+    .video-wrapper.playing .play-btn {
+      display: none;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 25px;
+      border-radius: 25px;
+      background: #ff4d88;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .music-box {
+      margin-top: 25px;
+      font-size: 0.8rem;
+      color: #aaa;
+      border-top: 1px dashed #ddd;
+      padding-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="video-page">
+    <h1>For You 💗</h1>
+
+    <div class="video-wrapper" id="videoBox" onclick="playVideo()">
+      <!-- Thumbnail -->
+      <img src="thumb1.jpg" class="video-thumb" alt="video thumbnail">
+
+      <!-- Play button -->
+      <div class="play-btn">▶</div>
+
+      <!-- Actual video -->
+      <video id="video">
+        <source src="video1.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+    </div>
+
+    <a href="gifts.html" class="back-btn">← Back to Gifts</a>
+
+    <div class="music-box">
+      🎵 Music Component (Video Page)
+    </div>
+  </div>
+
+  <script>
+    function playVideo() {
+      const box = document.getElementById("videoBox");
+      const video = document.getElementById("video");
+
+      if (box.classList.contains("playing")) return;
+
+      box.classList.add("playing");
+      box.classList.add("expanded");
+
+      video.play();
+      video.setAttribute("controls", "controls");
+    }
+  </script>
+
+</body>
+</html>
