@@ -137,9 +137,7 @@
   opacity: 1;
 }
     
-.video-wrapper.locked {
-  pointer-events: none;
-}
+
 .close-btn {
   position: absolute;
   top: 12px;
@@ -162,6 +160,10 @@
   display: flex;
 }
 
+.video-wrapper.locked .video-thumb,
+.video-wrapper.locked .play-btn {
+  pointer-events: none;
+}
 
     
   </style>
