@@ -125,7 +125,7 @@
       </video>
     </div>
 
-    <a href="gifts.html" class="back-btn">← Back to Gifts</a>
+    <a href="#" class="back-btn" onclick="goBack()">← Back to Gifts</a>
 
   
   </div>
@@ -143,6 +143,17 @@
       video.play();
       video.setAttribute("controls", "controls");
     }
+    function goBack() {
+  const video = document.getElementById("video");
+
+  if (!video.paused) {
+    video.pause();
+    video.currentTime = 0; // reset (optional but clean)
+  }
+
+  window.location.href = "gifts.html";
+}
+
   </script>
 
 </body>
