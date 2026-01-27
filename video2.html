@@ -179,7 +179,7 @@
 
       <!-- Play button -->
       <div class="play-btn">▶</div>
-      <div class="close-btn" onclick="closeVideo()">✕</div>
+      <div class="close-btn" onclick="closeVideo(event)">✕</div>
 
 
       <!-- Actual video -->
@@ -198,6 +198,7 @@
    let videoStarted = false;
 
 function playVideo() {
+  if (document.getElementById("videoBox").classList.contains("playing")) return;
   if (videoStarted) return; // hard lock
 
   videoStarted = true;
@@ -221,25 +222,21 @@ function playVideo() {
   }, 300);
 }
 
-  function closeVideo() {
+ function closeVideo(event) {
+  event.stopPropagation(); // 🔥 THIS is the key
+
   const box = document.getElementById("videoBox");
   const video = document.getElementById("video");
   const dim = document.getElementById("dim");
 
-  // Pause and reset video
   video.pause();
   video.currentTime = 0;
 
-  // Remove states
-  box.classList.remove("playing");
-  box.classList.remove("expanded");
-  box.classList.remove("locked");
+  box.classList.remove("playing", "expanded", "locked");
   dim.classList.remove("visible");
 
-  // Reset controls
   video.removeAttribute("controls");
 
-  // Allow play again
   videoStarted = false;
 }
 
