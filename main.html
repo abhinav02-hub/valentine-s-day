@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
   <link rel="preload" as="image" href="transition.gif">
-  
   <meta charset="UTF-8">
   <title>Will You Be My Valentine? 💗</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -15,6 +13,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Playfair Display', serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -24,6 +23,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
 
     /* Floating hearts */
@@ -47,18 +47,11 @@
       position: absolute;
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
 
     @keyframes float {
-      0% { bottom: -10%; transform: translateX(0) rotate(45deg); }
+      0% { bottom: -10%; }
       100% { bottom: 110%; transform: translateX(-50px) rotate(45deg); }
     }
 
@@ -71,6 +64,7 @@
       text-align: center;
       animation: fadeIn 1.5s ease;
       z-index: 10;
+      transition: all 8s ease; /* SLOW FADE */
     }
 
     @keyframes fadeIn {
@@ -82,7 +76,13 @@
       font-family: 'Pacifico', cursive;
       color: #ff4d88;
       font-size: 2.5rem;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
+    }
+
+    .main-gif {
+      width: 120px;
+      margin-bottom: 20px;
+      transition: opacity 0.5s ease;
     }
 
     .buttons {
@@ -102,20 +102,10 @@
       transition: 0.3s;
     }
 
-    #yesBtn {
-      background: #ff4d88;
-      color: white;
-    }
+    #yesBtn { background: #ff4d88; color: white; }
+    #yesBtn:hover { transform: scale(1.1); }
 
-    #yesBtn:hover {
-      transform: scale(1.1);
-    }
-
-    #noBtn {
-      background: #f1f1f1;
-      color: #333;
-      position: relative;
-    }
+    #noBtn { background: #f1f1f1; color: #333; position: relative; }
 
     .tease {
       margin-top: 15px;
@@ -124,154 +114,98 @@
       min-height: 20px;
     }
 
-    /* GIF */
-    .main-gif {
-      width: 120px;
-      margin-bottom: 20px;
-      transition: opacity 0.5s ease;
-    }
-
-    /* Burst hearts */
-    .heart-burst {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #ff4d88;
-      transform: rotate(45deg);
-      animation: burst 1s ease forwards;
-      opacity: 0.8;
-    }
-
-    .heart-burst::before,
-    .heart-burst::after {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: #ff4d88;
-      border-radius: 50%;
-      position: absolute;
-    }
-
-    .heart-burst::before {
-      top: -5px;
-      left: 0;
-    }
-
-    .heart-burst::after {
-      left: -5px;
-      top: 0;
-    }
-
-    @keyframes burst {
-      to {
-        transform: translate(var(--x), var(--y)) rotate(45deg);
-        opacity: 0;
-      }
+    /* Music box (RESTORED) */
+    .music-box {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #aaa;
+      border-top: 1px dashed #ddd;
+      padding-top: 10px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Hearts -->
-  <script>
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDelay = Math.random() * 5 + "s";
-      heart.style.opacity = Math.random();
-      document.body.appendChild(heart);
-    }
-  </script>
+<script>
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+  }
+</script>
 
-  <!-- MAIN AUDIO (MOVED HERE — IMPORTANT) -->
-  <audio id="bgMusic" src="main.wav" loop autoplay></audio>
+<div class="card" id="card">
+  <img src="main.gif" id="mainGif" class="main-gif">
+  <h1 id="title">Will you be my Valentine? 💗</h1>
 
-  <!-- Main Card -->
-  <div class="card">
-    <img src="main.gif" id="mainGif" class="main-gif" alt="cute gif">
-
-    <h1>Will you be my Valentine? 💗</h1>
-
-    <div class="buttons">
-      <button id="yesBtn" onclick="goYes()">Yes 💖</button>
-      <button id="noBtn" onclick="moveNo()">No 🙄</button>
-    </div>
-
-    <div class="tease" id="teaseText"></div>
+  <div class="buttons" id="buttons">
+    <button id="yesBtn" onclick="goYes()">Yes 💖</button>
+    <button id="noBtn" onclick="moveNo()">No 🙄</button>
   </div>
 
-  <script>
-    const bgMusic = document.getElementById("bgMusic");
-    if (bgMusic) bgMusic.volume = 0.6;
+  <div class="tease" id="teaseText"></div>
 
-    const teaseTexts = [
-      "Heyyy 😒 that’s not fair",
-      "Nice try, click YES 💗",
-      "You’re breaking my heart 💔",
-      "Nope, not allowed 😏"
-    ];
+  <!-- MUSIC TEXT BOX BACK -->
+  <div class="music-box">
+    🎵 Now Playing — <span id="songName">your song name</span>
+  </div>
+</div>
 
-    function moveNo() {
-      const btn = document.getElementById("noBtn");
-      const tease = document.getElementById("teaseText");
+<audio id="bgMusic" src="main.wav" loop autoplay></audio>
 
-      const maxX = window.innerWidth - btn.offsetWidth - 20;
-      const maxY = window.innerHeight - btn.offsetHeight - 20;
+<script>
+  const bgMusic = document.getElementById("bgMusic");
+  if (bgMusic) bgMusic.volume = 0.6;
 
-      btn.style.position = "fixed";
-      btn.style.left = Math.random() * maxX + "px";
-      btn.style.top = Math.random() * maxY + "px";
+  const teaseTexts = [
+    "Heyyy 😒 that’s not fair",
+    "Nice try, click YES 💗",
+    "You’re breaking my heart 💔",
+    "Nope, not allowed 😏"
+  ];
 
-      tease.innerText = teaseTexts[Math.floor(Math.random() * teaseTexts.length)];
-    }
+  function moveNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.position = "fixed";
+    btn.style.left = Math.random() * (window.innerWidth - btn.offsetWidth) + "px";
+    btn.style.top = Math.random() * (window.innerHeight - btn.offsetHeight) + "px";
+    document.getElementById("teaseText").innerText =
+      teaseTexts[Math.floor(Math.random() * teaseTexts.length)];
+  }
 
-    function goYes() {
-      const card = document.querySelector(".card");
-      const title = card.querySelector("h1");
-      const gif = document.getElementById("mainGif");
-      const buttons = document.querySelector(".buttons");
+  function goYes() {
+    const card = document.getElementById("card");
+    const title = document.getElementById("title");
+    const gif = document.getElementById("mainGif");
+    const buttons = document.getElementById("buttons");
 
-      title.innerText = "Yayyy 💕 preparing your surprises…";
+    title.innerText = "Yayyy 💕 preparing your surprises…";
 
-      buttons.style.opacity = "0";
-      setTimeout(() => buttons.style.display = "none", 500);
+    buttons.style.opacity = "0";
+    setTimeout(() => buttons.style.display = "none", 500);
 
-      gif.style.opacity = "0";
-      setTimeout(() => {
-        gif.src = "transition.gif";
-        gif.style.opacity = "1";
-      }, 500);
+    gif.style.opacity = "0";
+    setTimeout(() => {
+      gif.src = "transition.gif";
+      gif.style.opacity = "1";
+    }, 500);
 
-      for (let i = 0; i < 12; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart-burst";
-        heart.style.left = "50%";
-        heart.style.top = "45%";
-        heart.style.setProperty("--x", `${Math.random() * 120 - 60}px`);
-        heart.style.setProperty("--y", `${Math.random() * 120 - 60}px`);
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
+    /* SLOW FADE OUT */
+    card.style.transform = "scale(0.9)";
+    card.style.opacity = "0";
+
+    setTimeout(() => {
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
       }
-
-      card.style.transition = "all 6.5s ease";
-      card.style.transform = "scale(0.9)";
-      card.style.opacity = "0";
-
-      setTimeout(() => {
-        try {
-          bgMusic.pause();
-          bgMusic.currentTime = 0;
-        } catch (e) {}
-        window.location.href = "gifts.html";
-      }, 6000);
-    }
-
-    window.addEventListener("beforeunload", () => {
-      try { bgMusic.pause(); } catch (e) {}
-    });
-  </script>
+      window.location.href = "gifts.html";
+    }, 7000); // LONG transition like before
+  }
+</script>
 
 </body>
 </html>
