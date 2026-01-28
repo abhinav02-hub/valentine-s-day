@@ -122,6 +122,15 @@
       border-top: 1px dashed #ddd;
       padding-top: 10px;
     }
+
+    .no-hint {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 6px;
+  font-style: italic;
+  pointer-events: none;
+}
+
   </style>
 </head>
 
@@ -141,10 +150,17 @@
   <img src="main.gif" id="mainGif" class="main-gif">
   <h1 id="title">Will you be my Valentine? 💗</h1>
 
-  <div class="buttons" id="buttons">
+
+    <div class="buttons">
+  <div style="text-align:center">
     <button id="yesBtn" onclick="goYes()">Yes 💖</button>
-    <button id="noBtn" onclick="moveNo()">No 🙄</button>
   </div>
+
+  <div style="text-align:center">
+    <button id="noBtn" onclick="moveNo()">No 🙄</button>
+    <div class="no-hint">don’t click this 🙃</div>
+  </div>
+</div>
 
   <div class="tease" id="teaseText"></div>
 
