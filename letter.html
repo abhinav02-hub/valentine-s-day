@@ -38,6 +38,7 @@
       font-size: 1.15rem;
       line-height: 1.9;
       color: #444;
+      user-select: text;
     }
 
     .signature {
@@ -67,82 +68,62 @@
       border-top: 1px dashed #ddd;
       padding-top: 15px;
     }
+
     .corner-gifs {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
 
-.corner {
-  width: 50px;
-  opacity: 0.85;
-}
+    .corner {
+      width: 50px;
+      opacity: 0.85;
+      animation: fadeIn 1.5s ease forwards;
+    }
 
-.corner.left {
-  align-self: flex-start;
-}
+    .below-letter-gif {
+      width: 80px;
+      display: block;
+      margin: 40px auto 20px;
+      opacity: 0.9;
+      animation: fadeIn 1.5s ease forwards;
+    }
 
-.corner.right {
-  align-self: flex-start;
-}
-.below-letter-gif {
-  width: 80px;
-  display: block;
-  margin: 40px auto 20px;
-  opacity: 0.9;
-}
-.final-gif {
-  width: 60px;
-  display: block;
-  margin: 20px auto;
-  opacity: 0.85;
-}
-.animate-text span {
-  display: block;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: revealLine 0.8s ease forwards;
-  margin-bottom: 22px;   /* 👈 THIS controls paragraph gap */
-}
+    .final-gif {
+      width: 60px;
+      display: block;
+      margin: 20px auto;
+      opacity: 0.85;
+      animation: fadeIn 1.5s ease forwards;
+    }
 
+    .animate-text span {
+      display: block;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: revealLine 0.8s ease forwards;
+      margin-bottom: 22px;
+    }
 
-@keyframes revealLine {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes revealLine {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.corner,
-.below-letter-gif,
-.final-gif {
-  animation: fadeIn 1.5s ease forwards;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.9; }
+    }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.9;
-  }
-}
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-.content {
-  user-select: text;
-}
-button:active,
-.back-btn:active,
-.gift:active,
-.play-btn:active,
-.close-btn:active {
-  transform: scale(0.95);
-}
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-
-
+    .back-btn:active {
+      transform: scale(0.95);
+    }
   </style>
 </head>
 
@@ -150,15 +131,13 @@ button:active,
 
   <div class="letter">
     <h1>My Love 💗</h1>
-    <div class="corner-gifs">
-  <img src="gif1.gif" class="corner left">
-  <img src="gif2.gif" class="corner right">
-</div>
 
+    <div class="corner-gifs">
+      <img src="gif1.gif" class="corner left">
+      <img src="gif2.gif" class="corner right">
+    </div>
 
     <div class="content animate-text">
-
-      <!-- WRITE YOUR LETTER HERE -->
       Dear love,<br><br>
 
       From the moment you came into my life, everything felt a little warmer, a little brighter, and a lot more beautiful.
@@ -175,33 +154,49 @@ button:active,
     </div>
 
     <img src="gif3.gif" class="below-letter-gif">
-    <a href="gifts.html" class="back-btn">← Back to Gifts</a>
+
+    <!-- BACK BUTTON (STOP MUSIC SAFELY) -->
+    <a href="gifts.html" class="back-btn" onclick="stopMusic()">← Back to Gifts</a>
 
     <img src="gif4.gif" class="final-gif">
+
     <div class="music-box">
-      🎵 Music Component (Letter Page)
+      🎵 Now Playing — your song name
     </div>
   </div>
 
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" src="letter.mp3" loop autoplay></audio>
+
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const content = document.querySelector(".animate-text");
-    if (!content) return;
+    // text animation (UNCHANGED)
+    document.addEventListener("DOMContentLoaded", () => {
+      const content = document.querySelector(".animate-text");
+      if (!content) return;
 
-    // Split text by line breaks
-    const lines = content.innerHTML
-      .split("<br><br>")
-      .map(line => `<span>${line}</span>`);
+      const lines = content.innerHTML
+        .split("<br><br>")
+        .map(line => `<span>${line}</span>`);
 
-    content.innerHTML = lines.join("");
+      content.innerHTML = lines.join("");
 
-    const spans = content.querySelectorAll("span");
-    spans.forEach((span, index) => {
-      span.style.animationDelay = `${index * 0.6}s`;
+      const spans = content.querySelectorAll("span");
+      spans.forEach((span, index) => {
+        span.style.animationDelay = `${index * 0.6}s`;
+      });
     });
-  });
-</script>
 
+    // MUSIC CONTROL (NEW)
+    const bgMusic = document.getElementById("bgMusic");
+    if (bgMusic) bgMusic.volume = 0.5;
+
+    function stopMusic() {
+      if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+      }
+    }
+  </script>
 
 </body>
 </html>
