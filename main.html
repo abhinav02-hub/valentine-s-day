@@ -299,19 +299,29 @@ button:active,
   }
 
   // Card transition
-  card.style.transition = "all 8.9s ease";
+  card.style.transition = "all 7.9s ease";
   card.style.transform = "scale(0.9)";
   card.style.opacity = "0";
 
   // Redirect
   setTimeout(() => {
-    window.location.href = "gifts.html";
-  },6200);
+    bgMusic.pause();
+bgMusic.currentTime = 0;
+window.location.href = "gifts.html";
+
+  },6000);
 }
 
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.6; // adjust between 0.4 – 0.7
+
+window.addEventListener("beforeunload", () => {
+  bgMusic.pause();
+});
 
 
   </script>
+<audio id="bgMusic" src="main.wav" loop autoplay></audio>
 
 </body>
 </html>
