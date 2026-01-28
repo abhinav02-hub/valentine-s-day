@@ -123,6 +123,15 @@
       padding-top: 10px;
     }
 
+    .no-hint {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 6px;
+  font-style: italic;
+  pointer-events: none;
+}
+
+
   
   </style>
 </head>
@@ -143,15 +152,19 @@
   <img src="main.gif" id="mainGif" class="main-gif">
   <h1 id="title">Will you be my Valentine? 💗</h1>
 
+  <div class="buttons" id="buttons">
+    <div style="text-align:center">
+      <button id="yesBtn" onclick="goYes()">Yes 💖</button>
+    </div>
 
-    <div class="buttons" id="button">
-    <button id="yesBtn" onclick="goYes()">Yes 💖</button>
-    <button id="noBtn" onclick="moveNo()">No 🙄</button>
-</div>
-</div>
+    <div style="text-align:center">
+      <button id="noBtn" onclick="moveNo()">No 🙄</button>
+      <div class="no-hint">don’t click this, this button is dangerous 😤</div>
+    </div>
+  </div>
+
   <div class="tease" id="teaseText"></div>
 
-  <!-- MUSIC TEXT BOX BACK -->
   <div class="music-box">
     🎵 Now Playing — <span id="songName">From the start</span>
   </div>
