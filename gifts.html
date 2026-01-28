@@ -16,6 +16,8 @@
       justify-content: center;
       font-family: 'Playfair Display', serif;
       padding: 30px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .container {
@@ -74,61 +76,46 @@
       border-top: 1px dashed #ddd;
       padding-top: 15px;
     }
+
     .gift-top-img {
-  width: 140px;
-  margin-bottom: 20px;
-}
+      width: 140px;
+      margin-bottom: 20px;
+    }
 
-.bottom-gif {
-  position: fixed;
-  bottom: 12px;
-  width: 70px;
-  opacity: 0.85;
-  z-index: 50;              /* 🔥 VERY IMPORTANT */
-  pointer-events: none;     /* avoids blocking clicks */
-}
+    .bottom-gif {
+      position: fixed;
+      bottom: 12px;
+      width: 70px;
+      opacity: 0.85;
+      z-index: 50;
+      pointer-events: none;
+    }
 
-.bottom-left {
-  left: 10px;
-}
+    .bottom-left { left: 10px; }
+    .bottom-right { right: 10px; }
 
-.bottom-right {
-  right: 10px;
-}
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+      100% { transform: rotate(0deg); }
+    }
 
+    .gift.opening {
+      animation: shake 0.4s ease;
+      transform: scale(1.08);
+    }
 
-@keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(2deg); }
-  100% { transform: rotate(0deg); }
-}
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
 
-.gift.opening {
-  animation: shake 0.4s ease;
-  transform: scale(1.08);
-}
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-body {
-  user-select: none;
-}
-button:active,
-.back-btn:active,
-.gift:active,
-.play-btn:active,
-.close-btn:active {
-  transform: scale(0.95);
-}
-
-
+    button:active,
+    .gift:active {
+      transform: scale(0.95);
+    }
   </style>
 </head>
 
@@ -140,48 +127,53 @@ button:active,
     <div class="sub">Choose one… or maybe all 😌</div>
 
     <div class="gifts">
-  <div class="gift" onclick="openGift(this, 'letter.html')">
-    <div class="emoji">🎁</div>
-    <p>Gift One</p>
-  </div>
+      <div class="gift" onclick="openGift(this, 'letter.html')">
+        <div class="emoji">🎁</div>
+        <p>Gift One</p>
+      </div>
 
-  <div class="gift" onclick="openGift(this, 'video1.html')">
-    <div class="emoji">🎁</div>
-    <p>Gift Two</p>
-  </div>
+      <div class="gift" onclick="openGift(this, 'video1.html')">
+        <div class="emoji">🎁</div>
+        <p>Gift Two</p>
+      </div>
 
-  <div class="gift" onclick="openGift(this, 'video2.html')">
-    <div class="emoji">🎁</div>
-    <p>Gift Three</p>
-  </div>
-</div>
+      <div class="gift" onclick="openGift(this, 'video2.html')">
+        <div class="emoji">🎁</div>
+        <p>Gift Three</p>
+      </div>
+    </div>
 
-
+    <!-- MUSIC TEXT (UNCHANGED, YOU CAN EDIT TEXT) -->
     <div class="music-box">
-      🎵 Music Component (Gifts Page)
+      🎵 Now Playing — your song name
     </div>
   </div>
 
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" src="gifts.wav" loop autoplay></audio>
+
   <script>
-  function openGift(element, targetPage) {
-    // stop double clicks
-    if (element.classList.contains("opening")) return;
+    const bgMusic = document.getElementById("bgMusic");
+    if (bgMusic) bgMusic.volume = 0.6;
 
-    // add animation to the clicked gift
-    element.classList.add("opening");
+    function openGift(element, targetPage) {
+      if (element.classList.contains("opening")) return;
 
-    // fade whole page
-    document.body.classList.add("fade-out");
+      element.classList.add("opening");
+      document.body.classList.add("fade-out");
 
-    // go to next page after animation
-    setTimeout(() => {
-      window.location.href = targetPage;
-    }, 800);
-  }
-</script>
+      setTimeout(() => {
+        if (bgMusic) {
+          bgMusic.pause();
+          bgMusic.currentTime = 0;
+        }
+        window.location.href = targetPage;
+      }, 800);
+    }
+  </script>
 
-<img src="extra.gif" class="bottom-gif bottom-left" alt="gif">
-<img src="extra1.gif" class="bottom-gif bottom-right" alt="gif">
+  <img src="extra.gif" class="bottom-gif bottom-left" alt="gif">
+  <img src="extra1.gif" class="bottom-gif bottom-right" alt="gif">
 
 </body>
 </html>
