@@ -22,6 +22,8 @@
       max-width: 1100px;
       width: 100%;
       text-align: center;
+      position: relative;
+      z-index: 5;
     }
 
     h1 {
@@ -39,17 +41,17 @@
       gap: 35px;
     }
 
-    /* 🌸 Bouquet */
+    /* 🌸 Bouquet (FIXED) */
     .bouquet {
-  width: 420px;                 /* 🔥 BIGGER IMAGE */
-  border-radius: 26px;
-  border: 5px solid #ff4d88;
-  box-shadow: 
-    0 30px 70px rgba(255,77,136,0.45),
-    0 0 0 6px rgba(255,77,136,0.12);  /* soft outer ring */
-  animation: bloom 2.2s ease forwards;
-}
-}
+      width: 420px;
+      border-radius: 26px;
+      border: 5px solid #ff4d88;
+      box-shadow:
+        0 30px 70px rgba(255,77,136,0.45),
+        0 0 0 6px rgba(255,77,136,0.12);
+      opacity: 0; /* IMPORTANT */
+      animation: bloom 2.2s ease forwards;
+    }
 
     @keyframes bloom {
       from {
@@ -84,14 +86,11 @@
     /* tilt variations */
     .left .msg:nth-child(odd) { transform: rotate(-2deg); }
     .left .msg:nth-child(even) { transform: rotate(1.5deg); }
-
     .right .msg:nth-child(odd) { transform: rotate(2deg); }
     .right .msg:nth-child(even) { transform: rotate(-1.5deg); }
 
     @keyframes appear {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
     }
 
     @keyframes float {
@@ -111,50 +110,77 @@
       font-size: 0.95rem;
     }
 
+    /* 🌸 BACKGROUND HEARTS (SUBTLE) */
+    .bg-heart {
+      position: fixed;
+      bottom: -30px;
+      width: 14px;
+      height: 14px;
+      background: rgba(255,77,136,0.25);
+      transform: rotate(45deg);
+      animation: floatUp 12s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-heart::before,
+    .bg-heart::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: rgba(255,77,136,0.25);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .bg-heart::before { top: -7px; left: 0; }
+    .bg-heart::after { left: -7px; top: 0; }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(45deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      to { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+
     /* 📱 MOBILE */
     @media (max-width: 900px) {
-      .wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .bouquet {
-        margin: 0 auto 30px;
-        width: 300px;
-      }
-
-      .column {
-        align-items: center;
-      }
-
-      .msg {
-        max-width: 280px;
-      }
+      .wrap { grid-template-columns: 1fr; }
+      .bouquet { margin: 0 auto 30px; width: 300px; }
+      .column { align-items: center; }
+      .msg { max-width: 280px; }
     }
 
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { -webkit-tap-highlight-color: transparent; }
   </style>
 </head>
 
 <body>
 
+  <!-- BACKGROUND HEARTS -->
+  <script>
+    for (let i = 0; i < 10; i++) {
+      const h = document.createElement("div");
+      h.className = "bg-heart";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDelay = Math.random() * 8 + "s";
+      h.style.animationDuration = 10 + Math.random() * 6 + "s";
+      document.body.appendChild(h);
+    }
+  </script>
+
   <div class="container">
-    <h1>Just For You 🌹</h1>
+    <h1>Flowers For You 🌹</h1>
 
     <div class="wrap">
 
-      <!-- LEFT MESSAGES -->
       <div class="column left">
         <div class="msg" style="animation-delay:0.4s;">You are my safe place 💗</div>
         <div class="msg" style="animation-delay:0.6s;">Every moment with you matters</div>
         <div class="msg" style="animation-delay:0.8s;">You make my days softer</div>
       </div>
 
-      <!-- BOUQUET -->
       <img src="rosee.png" class="bouquet" alt="rose bouquet">
 
-      <!-- RIGHT MESSAGES -->
       <div class="column right">
         <div class="msg" style="animation-delay:1s;">I choose you, always 🌸</div>
         <div class="msg" style="animation-delay:1.2s;">My today & all tomorrows</div>
