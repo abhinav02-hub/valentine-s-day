@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Just For You 🌹</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
   <style>
@@ -12,41 +11,47 @@
       min-height: 100vh;
       background: linear-gradient(135deg, #ffe4f0, #ffffff);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 30px;
       font-family: 'Playfair Display', serif;
       overflow-x: hidden;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1100px;
       width: 100%;
       text-align: center;
-      position: relative;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
       color: #ff4d88;
-      margin-bottom: 25px;
-      font-size: 2.3rem;
+      margin-bottom: 35px;
+      font-size: 2.4rem;
     }
 
-    /* 🌹 Bouquet Image */
+    /* 🌹 MAIN LAYOUT */
+    .wrap {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 35px;
+    }
+
+    /* 🌸 Bouquet */
     .bouquet {
-      width: 260px;
-      border-radius: 22px;
+      width: 320px;
+      border-radius: 24px;
       border: 4px solid #ff4d88;
-      box-shadow: 0 25px 50px rgba(255,77,136,0.35);
+      box-shadow: 0 25px 55px rgba(255,77,136,0.35);
       animation: bloom 1.2s ease forwards;
-      opacity: 0;
     }
 
     @keyframes bloom {
       from {
         opacity: 0;
-        transform: scale(0.92);
+        transform: scale(0.94);
       }
       to {
         opacity: 1;
@@ -54,38 +59,35 @@
       }
     }
 
-    /* 💬 Message bubbles */
-    .messages {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+    /* 💬 Message columns */
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
     }
 
     .msg {
-      background: white;
-      padding: 18px 20px;
+      background: #ffffff;
+      border: 2px solid #ff9bbf;
+      padding: 16px 18px;
       border-radius: 18px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
       font-size: 0.95rem;
       color: #444;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
       opacity: 0;
-      transform: translateY(10px) scale(0.95);
-      animation: appear 0.6s ease forwards, float 4s ease-in-out infinite;
+      animation: appear 0.6s ease forwards, float 4.5s ease-in-out infinite;
     }
 
-    /* slight tilt for natural feel */
-    .msg:nth-child(1) { transform: rotate(-2deg); }
-    .msg:nth-child(2) { transform: rotate(2deg); }
-    .msg:nth-child(3) { transform: rotate(-1.5deg); }
-    .msg:nth-child(4) { transform: rotate(1.5deg); }
-    .msg:nth-child(5) { transform: rotate(-2.5deg); }
-    .msg:nth-child(6) { transform: rotate(2.5deg); }
+    /* tilt variations */
+    .left .msg:nth-child(odd) { transform: rotate(-2deg); }
+    .left .msg:nth-child(even) { transform: rotate(1.5deg); }
+
+    .right .msg:nth-child(odd) { transform: rotate(2deg); }
+    .right .msg:nth-child(even) { transform: rotate(-1.5deg); }
 
     @keyframes appear {
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
       }
     }
 
@@ -94,7 +96,7 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* Back button */
+    /* back button */
     .back-btn {
       display: inline-block;
       margin-top: 50px;
@@ -106,6 +108,26 @@
       font-size: 0.95rem;
     }
 
+    /* 📱 MOBILE */
+    @media (max-width: 900px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .bouquet {
+        margin: 0 auto 30px;
+        width: 260px;
+      }
+
+      .column {
+        align-items: center;
+      }
+
+      .msg {
+        max-width: 280px;
+      }
+    }
+
     * {
       -webkit-tap-highlight-color: transparent;
     }
@@ -115,18 +137,27 @@
 <body>
 
   <div class="container">
-    <h1>Your Rose Bouquet 🌹</h1>
+    <h1>Just For You 🌹</h1>
 
-    <!-- Bouquet Image -->
-    <img src="rosee.png" class="bouquet" alt="rose bouquet">
+    <div class="wrap">
 
-    <!-- Message Boxes -->
-    <div class="messages">
-      <div class="msg" style="animation-delay:0.4s;">You are my safe place 💗</div>
-      <div class="msg" style="animation-delay:0.6s;">Every moment with you feels special</div>
-      <div class="msg" style="animation-delay:0.8s;">I choose you, always 🌸</div>
-      <div class="msg" style="animation-delay:1s;">You make life softer</div>
-      <div class="msg" style="animation-delay:1.2s;">My today & all my tomorrows 💕</div>
+      <!-- LEFT MESSAGES -->
+      <div class="column left">
+        <div class="msg" style="animation-delay:0.4s;">You are my safe place 💗</div>
+        <div class="msg" style="animation-delay:0.6s;">Every moment with you matters</div>
+        <div class="msg" style="animation-delay:0.8s;">You make my days softer</div>
+      </div>
+
+      <!-- BOUQUET -->
+      <img src="rosee.png" class="bouquet" alt="rose bouquet">
+
+      <!-- RIGHT MESSAGES -->
+      <div class="column right">
+        <div class="msg" style="animation-delay:1s;">I choose you, always 🌸</div>
+        <div class="msg" style="animation-delay:1.2s;">My today & all tomorrows</div>
+        <div class="msg" style="animation-delay:1.4s;">With you, everything feels right 💕</div>
+      </div>
+
     </div>
 
     <a href="gifts.html" class="back-btn">← Back to Gifts</a>
