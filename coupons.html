@@ -38,7 +38,7 @@
     }
 
     .coupon {
-      width: 100%;
+      width: 107%;
       border-radius: 20px;
       box-shadow: 0 25px 45px rgba(0,0,0,0.15);
       position: absolute;
@@ -93,6 +93,14 @@
       text-decoration: none;
       font-size: 0.95rem;
     }
+    .coupon.special {
+  transform: scale(1.08);
+  border: 3px solid #ff4d88;
+  box-shadow:
+    0 30px 60px rgba(255,77,136,0.45),
+    0 0 0 6px rgba(255,77,136,0.15);
+}
+
   </style>
 </head>
 
@@ -104,7 +112,7 @@
     <div class="stage">
       <img src="kiss.png" class="coupon active" id="c1">
       <img src="date.png" class="coupon" id="c2">
-      <img src="waffle.png" class="coupon" id="c3">
+      <img src="waffle.png" class="coupon special" id="c3">
     </div>
 
     <div class="controls">
