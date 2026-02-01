@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Coupons 💝</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff0f6, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d88;
+      margin-bottom: 25px;
+    }
+
+    .coupon {
+      background: white;
+      border: 2px dashed #ff9bbf;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      animation: float 4s ease-in-out infinite;
+      display: none;
+    }
+
+    .coupon.active {
+      display: block;
+      animation: slideUp 0.8s ease forwards, float 4s ease-in-out infinite;
+    }
+
+    .coupon.special {
+      border: 3px solid #ff4d88;
+      box-shadow: 0 25px 55px rgba(255,77,136,0.35);
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      color: #ff4d88;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 25px;
+      border-radius: 25px;
+      background: #ff4d88;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Your Surprise 💗</h1>
+
+  <div class="coupon active" id="c1">
+    💋 <strong>Free Kisses Coupon</strong><br>
+    Redeem anytime, unlimited hugs included
+  </div>
+
+  <div class="arrow" onclick="nextCoupon()">⬇️</div>
+
+  <div class="coupon" id="c2">
+    💑 <strong>Free Date Coupon</strong><br>
+    You choose the place, I bring the smile
+  </div>
+
+  <div class="coupon special" id="c3">
+    🧇 <strong>Waffle Date Coupon</strong><br>
+    Our special place. Our special time.
+  </div>
+
+  <a href="gifts.html" class="back-btn">← Back to Gifts</a>
+</div>
+
+<script>
+  let step = 1;
+
+  function nextCoupon() {
+    step++;
+    if (step === 2) document.getElementById("c2").classList.add("active");
+    if (step === 3) document.getElementById("c3").classList.add("active");
+  }
+</script>
+
+</body>
+</html>
