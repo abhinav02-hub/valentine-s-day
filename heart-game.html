@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Little Game For You ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe4f0, #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      user-select: none;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d88;
+      margin-bottom: 20px;
+      font-size: 2.2rem;
+    }
+
+    .hint {
+      color: #777;
+      font-size: 0.95rem;
+      margin-bottom: 30px;
+    }
+
+    /* Heart */
+    .heart {
+      width: 140px;
+      height: 140px;
+      background: #ffd6e8;
+      position: relative;
+      transform: rotate(45deg);
+      margin: 0 auto 30px;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 140px;
+      height: 140px;
+      background: #ffd6e8;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -70px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -70px;
+      top: 0;
+    }
+
+    .heart.filled,
+    .heart.filled::before,
+    .heart.filled::after {
+      background: #ff4d88;
+    }
+
+    .progress {
+      font-size: 0.9rem;
+      color: #ff4d88;
+    }
+
+    .complete {
+      display: none;
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #ff4d88;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Fill the Heart ❤️</h1>
+  <div class="hint">Tap the heart a few times</div>
+
+  <div class="heart" id="heart"></div>
+
+  <div class="progress" id="progress">0 / 5 taps</div>
+  <div class="complete" id="complete">You unlocked something special 💗</div>
+</div>
+
+<script>
+  const heart = document.getElementById("heart");
+  const progress = document.getElementById("progress");
+  const complete = document.getElementById("complete");
+
+  let taps = 0;
+
+  heart.addEventListener("click", () => {
+    taps++;
+    progress.innerText = `${taps} / 5 taps`;
+
+    if (taps >= 3) {
+      heart.classList.add("filled");
+    }
+
+    if (taps === 5) {
+      complete.style.display = "block";
+      setTimeout(() => {
+        window.location.href = "coupons.html";
+      }, 2500);
+    }
+  });
+</script>
+
+</body>
+</html>
