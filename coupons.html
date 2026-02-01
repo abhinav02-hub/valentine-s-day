@@ -21,26 +21,32 @@
     .container {
       text-align: center;
       position: relative;
-      width: 330px;
+      width: 340px;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
       color: #ff4d88;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
-    /* Coupons */
+    /* Coupon area */
+    .stage {
+      position: relative;
+      height: 230px;          /* FIXED ALIGNMENT */
+      margin-bottom: 30px;
+    }
+
     .coupon {
       width: 100%;
       border-radius: 20px;
       box-shadow: 0 25px 45px rgba(0,0,0,0.15);
       position: absolute;
+      top: 0;
       left: 0;
-      top: 70px;
       opacity: 0;
-      transform: translateX(100%);
-      transition: 0.7s ease;
+      transform: translateX(120%);
+      transition: transform 0.7s ease, opacity 0.7s ease;
     }
 
     .coupon.active {
@@ -53,26 +59,39 @@
       opacity: 0;
     }
 
-    /* Arrow */
+    .coupon.right {
+      transform: translateX(120%);
+      opacity: 0;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
     .arrow {
       font-size: 2rem;
       color: #ff4d88;
       cursor: pointer;
-      margin-top: 260px;
       user-select: none;
+    }
+
+    .arrow.hidden {
+      visibility: hidden;
     }
 
     .back-btn {
       display: inline-block;
-      margin-top: 80px;
+      margin-top: 35px;
       padding: 10px 25px;
       border-radius: 25px;
       background: #ff4d88;
       color: white;
       text-decoration: none;
       font-size: 0.95rem;
-      position: relative;
-      z-index: 5;
     }
   </style>
 </head>
@@ -80,33 +99,64 @@
 <body>
 
   <div class="container">
-
     <h1>Your Surprise Coupons 💗</h1>
 
-    <img src="k.jpg" class="coupon active" id="c1">
-    <img src="date.png" class="coupon" id="c2">
-    <img src="waffle.png" class="coupon" id="c3">
+    <div class="stage">
+      <img src="kiss.png" class="coupon active" id="c1">
+      <img src="date.png" class="coupon" id="c2">
+      <img src="waffle.png" class="coupon" id="c3">
+    </div>
 
-    <div class="arrow" onclick="next()">➡️</div>
+    <div class="controls">
+      <div class="arrow hidden" id="prev" onclick="prev()">⬅️</div>
+      <div class="arrow" id="next" onclick="next()">➡️</div>
+    </div>
 
     <a href="gifts.html" class="back-btn">← Back to Gifts</a>
   </div>
 
 <script>
   let index = 1;
+  const total = 3;
+
+  function updateButtons() {
+    document.getElementById("prev").classList.toggle("hidden", index === 1);
+    document.getElementById("next").classList.toggle("hidden", index === total);
+  }
 
   function next() {
-    const curr = document.getElementById("c" + index);
-    curr.classList.remove("active");
-    curr.classList.add("left");
+    if (index >= total) return;
+
+    const current = document.getElementById("c" + index);
+    current.classList.remove("active");
+    current.classList.add("left");
 
     index++;
 
-    if (index > 3) index = 3;
+    const nextCoupon = document.getElementById("c" + index);
+    nextCoupon.classList.remove("right");
+    nextCoupon.classList.add("active");
 
-    const next = document.getElementById("c" + index);
-    next.classList.add("active");
+    updateButtons();
   }
+
+  function prev() {
+    if (index <= 1) return;
+
+    const current = document.getElementById("c" + index);
+    current.classList.remove("active");
+    current.classList.add("right");
+
+    index--;
+
+    const prevCoupon = document.getElementById("c" + index);
+    prevCoupon.classList.remove("left");
+    prevCoupon.classList.add("active");
+
+    updateButtons();
+  }
+
+  updateButtons();
 </script>
 
 </body>
