@@ -166,6 +166,29 @@
 
   updateButtons();
 </script>
+  <script>
+  const bgMusic = document.getElementById("bgMusic");
+
+  window.addEventListener("load", () => {
+    bgMusic.volume = 0;
+bgMusic.play().catch(() => {});
+let v = 0;
+const fade = setInterval(() => {
+  if (v >= 0.6) return clearInterval(fade);
+  v += 0.05;
+  bgMusic.volume = v;
+}, 150);
+
+    bgMusic.play().catch(() => {});
+  });
+
+  window.addEventListener("beforeunload", () => {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  });
+</script>
+
+<audio id="bgMusic" src="coupons.mp3" loop></audio>
 
 </body>
 </html>
