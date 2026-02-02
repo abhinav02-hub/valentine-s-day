@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You 🎧</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1426, #0e0b14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      color: #eee;
+      overflow: hidden;
+    }
+
+    /* 🌌 subtle animated background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(255,77,136,0.08),
+        rgba(255,77,136,0.02),
+        rgba(255,77,136,0.08)
+      );
+      animation: bgMove 12s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-40px); }
+      100% { transform: translateX(0); }
+    }
+
+    .player {
+      background: rgba(20, 16, 30, 0.85);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      padding: 36px;
+      width: 360px;
+      max-width: 92vw;
+      box-shadow:
+        0 40px 90px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.04);
+      text-align: center;
+    }
+
+    /* 🎨 album art */
+    .cover {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 30px 70px rgba(255,77,136,0.45),
+        0 0 0 6px rgba(255,77,136,0.12);
+      margin-bottom: 26px;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 🎵 song info */
+    .title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .artist {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 18px;
+    }
+
+    /* 💗 dedication note */
+    .note {
+      font-family: 'Pacifico', cursive;
+      font-size: 0.95rem;
+      color: #ff8fb3;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeNote 2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeNote {
+      to { opacity: 1; }
+    }
+
+    /* 🌊 visualizer */
+    .visualizer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 4px;
+      height: 42px;
+      margin-bottom: 24px;
+    }
+
+    .bar {
+      width: 4px;
+      height: 10px;
+      background: linear-gradient(#ff4d88, #ff9bbf);
+      border-radius: 4px;
+      animation: idle 1.4s infinite ease-in-out;
+    }
+
+    @keyframes idle {
+      0%,100% { height: 10px; opacity: 0.4; }
+      50% { height: 20px; opacity: 0.7; }
+    }
+
+    /* ▶️ controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .play {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #ff4d88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(255,77,136,0.5);
+      transition: transform 0.2s;
+    }
+
+    .play:active {
+      transform: scale(0.92);
+    }
+
+    .play span {
+      font-size: 1.3rem;
+      color: white;
+    }
+
+    /* ⏱ progress */
+    .time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    .progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff4d88, #ff9bbf);
+      border-radius: 6px;
+    }
+
+    /* back */
+    .back {
+      display: inline-block;
+      margin-top: 26px;
+      font-size: 0.85rem;
+      color: #ff9bbf;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="player">
+
+    <!-- 🎨 BANNER (UPLOAD YOUR IMAGE HERE) -->
+    <div class="cover">
+      <img src="banner.jpg" alt="Album Art">
+    </div>
+
+    <div class="title">Tu Aisa Kaise Hai</div>
+    <div class="artist">Osho Jain</div>
+
+    <div class="note">I dedicate every line to you</div>
+
+    <!-- 🌊 VISUALIZER -->
+    <div class="visualizer" id="viz">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <!-- ▶️ CONTROLS -->
+    <div class="controls">
+      <div class="play" id="playBtn">
+        <span id="icon">▶</span>
+      </div>
+    </div>
+
+    <!-- ⏱ TIME + PROGRESS -->
+    <div class="time">
+      <span id="current">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="progress" id="progress">
+      <div class="progress-fill" id="fill"></div>
+    </div>
+
+    <a href="gifts.html" class="back">← Back</a>
+
+  </div>
+
+  <!-- 🎵 AUDIO -->
+  <audio id="audio" src="music.mp3"></audio>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("playBtn");
+    const icon = document.getElementById("icon");
+    const fill = document.getElementById("fill");
+    const progress = document.getElementById("progress");
+    const current = document.getElementById("current");
+    const duration = document.getElementById("duration");
+    const bars = document.querySelectorAll(".bar");
+
+    let playing = false;
+
+    function format(t) {
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60).toString().padStart(2, "0");
+      return `${m}:${s}`;
+    }
+
+    audio.addEventListener("loadedmetadata", () => {
+      duration.textContent = format(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      fill.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+      current.textContent = format(audio.currentTime);
+    });
+
+    playBtn.onclick = () => {
+      if (!playing) {
+        audio.play();
+        icon.textContent = "❚❚";
+        animateBars(true);
+      } else {
+        audio.pause();
+        icon.textContent = "▶";
+        animateBars(false);
+      }
+      playing = !playing;
+    };
+
+    progress.onclick = (e) => {
+      const rect = progress.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    };
+
+    function animateBars(active) {
+      bars.forEach((bar, i) => {
+        bar.style.animation = active
+          ? `idle ${0.8 + i * 0.1}s infinite ease-in-out`
+          : "idle 1.4s infinite ease-in-out";
+      });
+    }
+  </script>
+
+</body>
+</html>
