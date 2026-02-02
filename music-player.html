@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>One Last Thing 💗</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffe4f0, #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      user-select: none;
+    }
+
+    .player {
+      width: 360px;
+      background: white;
+      border-radius: 26px;
+      box-shadow:
+        0 30px 70px rgba(255,77,136,0.35),
+        0 0 0 6px rgba(255,77,136,0.12);
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Banner placeholder */
+    .banner {
+      width: 100%;
+      height: 180px;
+      border-radius: 20px;
+      background: #ffd6e8;
+      background-image: url("banner.jpg"); /* ← YOU UPLOAD THIS */
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4d88;
+      font-size: 1.8rem;
+      margin: 5px 0;
+    }
+
+    .artist {
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 18px;
+    }
+
+    /* Visualizer */
+    .visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 4px;
+      height: 40px;
+      margin-bottom: 20px;
+    }
+
+    .bar {
+      width: 4px;
+      height: 10px;
+      background: #ff4d88;
+      border-radius: 2px;
+      animation: bounce 1s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    .bar:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { height: 10px; }
+      50% { height: 35px; }
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .play-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #ff4d88;
+      color: white;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(255,77,136,0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .play-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background: #f1f1f1;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #ff4d88;
+      border-radius: 4px;
+    }
+
+    .time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #777;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 22px;
+      border-radius: 25px;
+      background: #ff4d88;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="player">
+    <div class="banner"></div>
+
+    <h1>Tu Aisa Kaise Hai 💗</h1>
+    <div class="artist">Osho Jain</div>
+
+    <!-- Visualizer -->
+    <div class="visualizer" id="visualizer">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="play-btn" id="playBtn">▶</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-container" id="progressContainer">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="time">
+      <span id="current">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+
+    <a href="gifts.html" class="back-btn">← Back to Gifts</a>
+  </div>
+
+  <!-- Audio -->
+  <audio id="audio" src="tu_aisa_kaise_hai.mp3"></audio>
+
+<script>
+  const audio = document.getElementById("audio");
+  const playBtn = document.getElementById("playBtn");
+  const progress = document.getElementById("progress");
+  const progressContainer = document.getElementById("progressContainer");
+  const current = document.getElementById("current");
+  const duration = document.getElementById("duration");
+  const visualizer = document.getElementById("visualizer");
+
+  let playing = false;
+
+  playBtn.addEventListener("click", () => {
+    if (!playing) {
+      audio.play();
+      playBtn.innerText = "⏸";
+      visualizer.style.display = "flex";
+    } else {
+      audio.pause();
+      playBtn.innerText = "▶";
+    }
+    playing = !playing;
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    duration.innerText = format(audio.duration);
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    progress.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+    current.innerText = format(audio.currentTime);
+  });
+
+  progressContainer.addEventListener("click", (e) => {
+    const width = progressContainer.clientWidth;
+    const clickX = e.offsetX;
+    audio.currentTime = (clickX / width) * audio.duration;
+  });
+
+  function format(time) {
+    const min = Math.floor(time / 60);
+    const sec = Math.floor(time % 60).toString().padStart(2, "0");
+    return `${min}:${sec}`;
+  }
+
+  audio.addEventListener("ended", () => {
+    playBtn.innerText = "▶";
+    playing = false;
+  });
+</script>
+
+</body>
+</html>
