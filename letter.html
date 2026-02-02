@@ -140,11 +140,11 @@
     <div class="content animate-text">
       Dear Ashhii,<br><br>
 
-     First of all...i am soo sorry for all the mess , all the chaos i created in the past 2 months, 
+      First of all...i am soo sorry for all the mess , all the chaos i created in the past 2 months, 
       i am sorry for hurting you and i am sorry for making you feel like that, I hope this will make you feel better, 
       and will ..will bring a smile on your face cuz thats all i want. Thankkk youu so muchhh to trust me again, 
       thankk youu to lovee me againn, I..I am too greatful to have you in my life darling.
-the moment you came into my life, everything felt a little warmer, a little brighter, and a lot more beautiful. 
+      the moment you came into my life, everything felt a little warmer, a little brighter, and a lot more beautiful. 
       You have this way of making even the smallest moments feel special, and I don’t think you even realize how magical that is. <br><br>
 
       You wont beleive but your texts brings a smile to my face, i get excited as same as i used to get 2 years before,
@@ -165,8 +165,10 @@ the moment you came into my life, everything felt a little warmer, a little brig
 
     <img src="gif3.gif" class="below-letter-gif">
 
-    <!-- BACK BUTTON (STOP MUSIC SAFELY) -->
-    <a href="gifts.html" class="back-btn" onclick="stopMusic()">← Back to Gifts</a>
+    <!-- ✅ BACK BUTTON (STOP MUSIC + MARK DONE) -->
+    <a href="gifts.html" class="back-btn" onclick="handleBack()">
+      ← Go back to gifts for the last thing 💗
+    </a>
 
     <img src="gif4.gif" class="final-gif">
 
@@ -179,7 +181,7 @@ the moment you came into my life, everything felt a little warmer, a little brig
   <audio id="bgMusic" src="letter.mp3" loop autoplay></audio>
 
   <script>
-    // text animation (UNCHANGED)
+    /* TEXT ANIMATION — UNCHANGED */
     document.addEventListener("DOMContentLoaded", () => {
       const content = document.querySelector(".animate-text");
       if (!content) return;
@@ -196,7 +198,7 @@ the moment you came into my life, everything felt a little warmer, a little brig
       });
     });
 
-    // MUSIC CONTROL (NEW)
+    /* MUSIC CONTROL — UNCHANGED */
     const bgMusic = document.getElementById("bgMusic");
     if (bgMusic) bgMusic.volume = 0.5;
 
@@ -205,6 +207,12 @@ the moment you came into my life, everything felt a little warmer, a little brig
         bgMusic.pause();
         bgMusic.currentTime = 0;
       }
+    }
+
+    /* ✅ NEW: COMBINED HANDLER */
+    function handleBack() {
+      stopMusic(); // stop music safely
+      localStorage.setItem("allGiftsDone", "true"); // unlock final button
     }
   </script>
 
