@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Now Playing • Spotify Style</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #121212, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.player {
+  width: 320px;
+  background: #181818;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+}
+
+.album-art {
+  width: 100%;
+  height: 260px;
+  border-radius: 14px;
+  background: url("banner.jpg") center/cover no-repeat;
+  margin-bottom: 15px;
+}
+
+.song-info {
+  text-align: center;
+}
+
+.song-info h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.song-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+.progress-container {
+  margin: 15px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #404040;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: #1db954;
+  border-radius: 5px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.play-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #1db954;
+  color: black;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+  <div class="album-art"></div>
+
+  <div class="song-info">
+    <h3>Tu aisa kaise hai</h3>
+    <p>Osho Jain</p>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button>⏮</button>
+    <button class="play-btn" id="playBtn">▶</button>
+    <button>⏭</button>
+  </div>
+
+  <audio id="audio">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const progressBar = document.getElementById("progressBar");
+
+playBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.innerHTML = "⏸";
+  } else {
+    audio.pause();
+    playBtn.innerHTML = "▶";
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + "%";
+});
+
+progressBar.addEventListener("click", (e) => {
+  const width = progressBar.clientWidth;
+  const clickX = e.offsetX;
+  audio.currentTime = (clickX / width) * audio.duration;
+});
+</script>
+
+</body>
+</html>
