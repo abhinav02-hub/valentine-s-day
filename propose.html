@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Propose Day 💍</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&family=Homemade+Apple&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,#ffe4f0,#ffffff);
+font-family:'Playfair Display',serif;
+}
+.page{animation:pageIn .8s ease forwards;}
+.page.fade-out{animation:pageOut .6s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
+@keyframes pageOut{to{opacity:0;transform:scale(.96);}}
+
+.container{text-align:center;}
+h1{font-family:'Pacifico';font-size:2.4rem;color:#ff4d88;margin-bottom:20px;}
+.line{font-family:'Homemade Apple';font-size:1.1rem;margin-bottom:30px;}
+.buttons{display:flex;gap:20px;justify-content:center;margin-top:15px;}
+button{padding:12px 30px;border:none;border-radius:25px;cursor:pointer;}
+#yes{background:#ff4d88;color:white;}
+#no{background:#eee;}
+button:active{transform:scale(.95);}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="container">
+<h1>Happy Propose Day 💍</h1>
+<p class="line">Will you stay with me forever?</p>
+
+<h3>Do you accept it?</h3>
+<div class="buttons">
+<button id="yes" onclick="nextPage()">Yes 💗</button>
+<button id="no" onclick="moveNo()">No 🙄</button>
+</div>
+</div>
+</div>
+
+<script>
+function nextPage(){
+document.querySelector(".page").classList.add("fade-out");
+setTimeout(()=>{window.location.href="chocolate.html";},600);
+}
+function moveNo(){
+const btn=document.getElementById("no");
+btn.style.position="fixed";
+btn.style.left=Math.random()*80+"vw";
+btn.style.top=Math.random()*80+"vh";
+}
+</script>
+
+</body>
+</html>
