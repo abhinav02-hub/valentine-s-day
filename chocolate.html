@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Chocolate Day 🍫</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff3e6,#ffffff);font-family:'Playfair Display';}
+.page{animation:pageIn .8s ease forwards;}
+.page.fade-out{animation:pageOut .6s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
+@keyframes pageOut{to{opacity:0;transform:scale(.96);}}
+
+.container{text-align:center;}
+h1{font-family:'Pacifico';font-size:2.4rem;color:#a0522d;margin-bottom:40px;}
+img{width:250px;margin-bottom:40px;}
+button{padding:14px 35px;border:none;border-radius:30px;background:#a0522d;color:white;cursor:pointer;}
+button:active{transform:scale(.95);}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="container">
+<h1>Happy Chocolate Day 🍫</h1>
+<img src="chocolate.png">
+<button onclick="nextPage()">Next 💗</button>
+</div>
+</div>
+
+<script>
+function nextPage(){
+document.querySelector(".page").classList.add("fade-out");
+setTimeout(()=>{window.location.href="teddy.html";},600);
+}
+</script>
+
+</body>
+</html>
