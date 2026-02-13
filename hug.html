@@ -11,24 +11,24 @@ height:100vh;overflow:hidden;
 display:flex;align-items:center;justify-content:center;
 background:linear-gradient(135deg,#ffd6e8,#ffffff);
 }
+
 .page{animation:pageIn .8s ease forwards;}
 .page.fade-out{animation:pageOut .6s ease forwards;}
 @keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
-@keyframes pageOut{to{opacity:0;transform:scale(.96);}}
+@keyframes pageOut{to{opacity:0;transform:scale(.96);} }
 
-.container{text-align:center;}
+.container{text-align:center;z-index:2;}
 h1{
 font-family:'Pacifico';
 font-size:2.5rem;
 color:#ff4d88;
-margin-bottom:40px;
+margin-bottom:35px;
 }
-img{
-  width:280px;
-  margin-bottom:40px;
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
+
+.hug-img{
+width:280px;
+display:block;
+margin:0 auto 40px auto;
 }
 
 button{
@@ -40,6 +40,17 @@ color:white;
 cursor:pointer;
 }
 button:active{transform:scale(.95);}
+
+/* BOTTOM GIFS */
+.bottom-gif{
+position:fixed;
+bottom:15px;
+width:90px;
+opacity:.9;
+pointer-events:none;
+}
+.left{left:15px;}
+.right{right:15px;}
 </style>
 </head>
 <body>
@@ -47,10 +58,16 @@ button:active{transform:scale(.95);}
 <div class="page">
 <div class="container">
 <h1>Happy Hug Day 🥰</h1>
-<img src="hug.jpg">
+
+<img src="hug.jpg" class="hug-img">
+
 <button onclick="nextPage()">See what I got for you 💗</button>
 </div>
 </div>
+
+<!-- ✅ BOTTOM GIFS -->
+<img src="huggif1.gif" class="bottom-gif left">
+<img src="huggif2.gif" class="bottom-gif right">
 
 <script>
 function nextPage(){
