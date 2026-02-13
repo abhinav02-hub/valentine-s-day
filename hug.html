@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Hug Day 🤗</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,#ffd6e8,#ffffff);
+}
+.page{animation:pageIn .8s ease forwards;}
+.page.fade-out{animation:pageOut .6s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
+@keyframes pageOut{to{opacity:0;transform:scale(.96);}}
+
+.container{text-align:center;}
+h1{
+font-family:'Pacifico';
+font-size:2.5rem;
+color:#ff4d88;
+margin-bottom:40px;
+}
+img{
+width:280px;
+margin-bottom:40px;
+}
+button{
+padding:16px 40px;
+border:none;
+border-radius:35px;
+background:#ff4d88;
+color:white;
+cursor:pointer;
+}
+button:active{transform:scale(.95);}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="container">
+<h1>Happy Hug Day 🤗</h1>
+<img src="hug.png">
+<button onclick="nextPage()">See what I got for you 💗</button>
+</div>
+</div>
+
+<script>
+function nextPage(){
+document.querySelector(".page").classList.add("fade-out");
+setTimeout(()=>{window.location.href="gifts.html";},600);
+}
+</script>
+
+</body>
+</html>
