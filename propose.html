@@ -20,6 +20,14 @@ font-family:'Playfair Display',serif;
 .container{text-align:center;}
 h1{font-family:'Pacifico';font-size:2.4rem;color:#ff4d88;margin-bottom:20px;}
 .line{font-family:'Homemade Apple';font-size:1.1rem;margin-bottom:30px;}
+
+/* ✅ NEW IMAGE STYLE */
+.propose-img{
+  width:160px;
+  display:block;
+  margin:20px auto 25px auto;
+}
+
 .buttons{display:flex;gap:20px;justify-content:center;margin-top:15px;}
 button{padding:12px 30px;border:none;border-radius:25px;cursor:pointer;}
 #yes{background:#ff4d88;color:white;}
@@ -32,9 +40,12 @@ button:active{transform:scale(.95);}
 <div class="page">
 <div class="container">
 <h1>Happy Propose Day 💍</h1>
+
+<!-- ✅ NEW CENTERED IMAGE -->
+<img src="propose.jpg" class="propose-img" alt="Propose">
+
 <p class="line">Will you stay with me forever?</p>
 
-<h3>Do you accept it?</h3>
 <div class="buttons">
 <button id="yes" onclick="nextPage()">Yes 💗</button>
 <button id="no" onclick="moveNo()">No 🙄</button>
