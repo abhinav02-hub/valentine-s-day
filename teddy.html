@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Teddy Day 🧸</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,#fff0f5,#ffffff);
+font-family:'Playfair Display',serif;
+}
+.page{animation:pageIn .8s ease forwards;}
+.page.fade-out{animation:pageOut .6s ease forwards;}
+@keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
+@keyframes pageOut{to{opacity:0;transform:scale(.96);}}
+
+.container{text-align:center;}
+h1{
+font-family:'Pacifico',cursive;
+font-size:2.4rem;
+color:#ff69b4;
+margin-bottom:40px;
+}
+img{
+width:260px;
+margin-bottom:40px;
+}
+button{
+padding:14px 35px;
+border:none;
+border-radius:30px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+}
+button:active{transform:scale(.95);}
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="container">
+<h1>Happy Teddy Day 🧸</h1>
+<img src="teddy.png">
+<button onclick="nextPage()">Next 💗</button>
+</div>
+</div>
+
+<script>
+function nextPage(){
+document.querySelector(".page").classList.add("fade-out");
+setTimeout(()=>{window.location.href="promise.html";},600);
+}
+</script>
+
+</body>
+</html>
