@@ -11,12 +11,16 @@ height:100vh;overflow:hidden;
 display:flex;align-items:center;justify-content:center;
 background:linear-gradient(135deg,#ffc1d9,#ffe6f2);
 font-family:'Playfair Display';
+position:relative;
 }
+
+/* PAGE TRANSITION */
 .page{animation:pageIn .8s ease forwards;}
 .page.fade-out{animation:pageOut .6s ease forwards;}
 @keyframes pageIn{from{opacity:0;transform:scale(.97);}to{opacity:1;}}
 @keyframes pageOut{to{opacity:0;transform:scale(.96);}}
 
+/* FLOATING KISSES */
 .kiss{
 position:absolute;
 opacity:.3;
@@ -27,14 +31,13 @@ animation:float 10s linear infinite;
 100%{transform:translateY(-10vh);}
 }
 
-.container{text-align:center;}
-h1{font-family:'Pacifico';font-size:2.4rem;color:#d63384;margin-bottom:40px;}
-img{
-  width:280px;
-  margin-bottom:40px;
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
+.container{text-align:center;z-index:2;}
+h1{font-family:'Pacifico';font-size:2.4rem;color:#d63384;margin-bottom:35px;}
+
+.kiss-img{
+width:260px;
+display:block;
+margin:0 auto 40px auto;
 }
 
 button{
@@ -46,6 +49,17 @@ color:white;
 cursor:pointer;
 }
 button:active{transform:scale(.95);}
+
+/* BOTTOM GIFS */
+.bottom-gif{
+position:fixed;
+bottom:15px;
+width:90px;
+opacity:.9;
+pointer-events:none;
+}
+.left{left:15px;}
+.right{right:15px;}
 </style>
 </head>
 <body>
@@ -64,10 +78,16 @@ document.body.appendChild(k);
 <div class="page">
 <div class="container">
 <h1>Happy Kiss Day 💋</h1>
-<img src="kisss.jpg">
+
+<img src="kisss.jpg" class="kiss-img">
+
 <button onclick="nextPage()">Next 💗</button>
 </div>
 </div>
+
+<!-- ✅ BOTTOM GIFS -->
+<img src="kissgif1.gif" class="bottom-gif left">
+<img src="kissgif2.gif" class="bottom-gif right">
 
 <script>
 function nextPage(){
