@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>THE END</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@500&family=Homemade+Apple&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#2a2038,#0f0d14);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+  font-family:'Playfair Display',serif;
+  color:#eee;
+}
+
+.letter{
+  background:rgba(22,22,28,0.92);
+  max-width:760px;
+  width:100%;
+  padding:50px;
+  border-radius:24px;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.05);
+  animation:fadeIn 1.2s ease forwards;
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  color:#ff9bbf;
+  text-align:center;
+  margin-bottom:35px;
+  font-size:2.3rem;
+}
+
+.content{
+  font-family:'Homemade Apple',cursive;
+  font-size:1.05rem;
+  line-height:2;
+  color:#f2e9ef;
+  user-select:text;
+}
+
+.signature{
+  margin-top:45px;
+  text-align:right;
+  font-family:'Pacifico',cursive;
+  color:#ff9bbf;
+  font-size:1.2rem;
+}
+
+.music-box{
+  margin-top:40px;
+  text-align:center;
+  font-size:0.8rem;
+  color:#9f9f9f;
+  border-top:1px dashed rgba(255,255,255,0.15);
+  padding-top:18px;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="letter">
+
+  <h1>One Last Letter</h1>
+
+  <div class="content">
+
+    Dear ______,<br><br>
+
+    There are so many things I wanted to say,
+    and somehow I could never fit them into a message.
+
+    Maybe some stories don't end the way we imagined.
+    Maybe some people stay in our hearts even when they stop
+    being a part of our everyday lives.
+
+    Thank you for every smile,
+    every memory,
+    every little moment that once made life feel warmer.
+
+    I don't know where life takes us from here,
+    but a part of me will always be grateful that our paths crossed.
+
+    I hope you find happiness,
+    peace,
+    and every beautiful thing you deserve.
+
+    Take care. 💗
+
+  </div>
+
+  <div class="signature">
+    — Abhii
+  </div>
+
+  <div class="music-box">
+    🎵 Now Playing — cold
+  </div>
