@@ -143,3 +143,21 @@ please ek chance ashii, sirf ek chance. whenever you are reading this, if you re
   <a href="main.html" class="back-home">
   Visit Our Story Again 💗
 </a>
+<audio id="bgMusic" src="cold.mp3" loop autoplay></audio>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+
+if (bgMusic) {
+  bgMusic.volume = 0.5;
+
+  window.addEventListener("load", () => {
+    bgMusic.play().catch(() => {});
+  });
+
+  window.addEventListener("beforeunload", () => {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+  });
+}
+</script>
